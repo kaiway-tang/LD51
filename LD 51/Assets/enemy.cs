@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
-public class enemy : MonoBehaviour
+public class enemy : mobileEntity
 {
     protected Transform plyrTrfm;
+    [SerializeField] AIDestinationSetter destinationScr;
+    
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        
+        plyrTrfm = PlayerController.plyrTrfm;
+        destinationScr.target = plyrTrfm;
     }
 
     // Update is called once per frame

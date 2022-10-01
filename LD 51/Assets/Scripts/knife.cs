@@ -5,22 +5,26 @@ using UnityEngine;
 public class knife : MonoBehaviour
 {
     [SerializeField] float spd;
-    int status, age;
+    int status, age, damage;
     const int thrown = 0, embedded = 1, returning = 2;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] Transform trfm, rendTrfm;
+    [SerializeField] Transform trfm, rendTrfm, ptclTrfm;
     [SerializeField] SpriteRenderer sprRend;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] ParticleSystem ptclSys;
+    [SerializeField] selfDest ptclScr;
+    [SerializeField] BoxCollider2D boxcol;
     // Start is called before the first frame update
     void Start()
     {
-        //trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - CamController.mainCam.ScreenToWorldPoint(Input.mousePosition).y, trfm.position.x - CamController.mainCam.ScreenToWorldPoint(Input.mousePosition).x) * Mathf.Rad2Deg + 90, Vector3.forward);
+        damage = 10;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         age++;
+        if (age == 1) boxcol.enabled = true;
         if (status == thrown)
         {
             trfm.position += trfm.up * spd;
@@ -39,6 +43,8 @@ public class knife : MonoBehaviour
             rendTrfm.Rotate(Vector3.forward * Random.Range(0,360));
             status = returning;
             sprRend.sprite = sprites[1];
+            ptclSys.emissionRate = 70;
+            damage = 10;
         }
     }
 
@@ -46,17 +52,15 @@ public class knife : MonoBehaviour
     {
         if (col.gameObject.layer == 7) //hit entity
         {
-            if (!col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID) && status != thrown)
+            if (!col.GetComponent<HPEntity>().takeDamage(damage, HPEntity.playerID) && status != thrown)
             {
-                PlayerController.self.pickUpKnife();
-                Destroy(gameObject);
+                pickUp();
             }
         } else if (col.gameObject.layer == 6) //hit terrain
         {
             if (status == thrown)
             {
-                sprRend.sprite = sprites[0];
-                status = embedded;
+                embed();
             }
         }
     }
@@ -66,9 +70,25 @@ public class knife : MonoBehaviour
         {
             if (col.GetComponent<HPEntity>().ID == HPEntity.playerID && status != thrown && age > 25)
             {
-                PlayerController.self.pickUpKnife();
-                Destroy(gameObject);
+                pickUp();
             }
         }
+    }
+
+    void pickUp()
+    {
+        PlayerController.self.pickUpKnife();
+        ptclTrfm.parent = null;
+        ptclSys.Stop();
+        ptclScr.enabled = true;
+        Destroy(gameObject);
+    }
+
+    void embed()
+    {
+        sprRend.sprite = sprites[0];
+        status = embedded;
+        ptclSys.emissionRate = 6;
+        damage = 0;
     }
 }

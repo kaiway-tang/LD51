@@ -27,6 +27,7 @@ public class PlayerController : mobileEntity
     private void Awake()
     {
         self = GetComponent<PlayerController>();
+        plyrTrfm = transform;
     }
 
     new void Start()
@@ -42,7 +43,7 @@ public class PlayerController : mobileEntity
         if (Input.GetKeyDown(KeyCode.U) && knivesLeft > 0 && gravityLock < 1) dash();
         if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 2 && gravityLock < 1) annihilate();
         if (Input.GetKeyDown(KeyCode.S) && knivesLeft > 4 && gravityLock < 1) skyfall();
-        if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 1 && gravityLock < 1) ascent();
+        if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 2 && gravityLock < 1) ascent();
 
         if (Input.GetMouseButtonDown(0) && knivesLeft > 0 && gravityLock < 1) throwKnife(faceMouse());
         if (Input.GetMouseButtonDown(1) && knivesLeft > 2 && gravityLock < 1) aimedAnnihilate();
@@ -70,28 +71,28 @@ public class PlayerController : mobileEntity
         {
             if (skyfallTmr > 25)
             {
-                vect2.x = 0; vect2.y = 11f;
+                vect2.x = 0; vect2.y = 22f;
                 rb.velocity = vect2;
             } else
             {
                 if (skyfallTmr == 25)
                 {
-                    vect3.x = 0; vect3.y = 2;
+                    vect3.x = 0; vect3.y = -2;
                     throwKnife(Quaternion.Euler(0, 0, 180), vect3);
                 }
                 if (skyfallTmr == 20)
                 {
-                    vect3.x = 1; vect3.y = 2;
+                    vect3.x = 1.5f; vect3.y = -2;
                     throwKnife(Quaternion.Euler(0, 0, 180), vect3);
-                    vect3.x = -1; vect3.y = 2;
+                    vect3.x = -1.5f;
                     throwKnife(Quaternion.Euler(0, 0, 180), vect3);
                     CamController.self.hardLockOn();
                 }
                 if (skyfallTmr == 15)
                 {
-                    vect3.x = 2; vect3.y = 2;
+                    vect3.x = 3; vect3.y = -2;
                     throwKnife(Quaternion.Euler(0, 0, 180), vect3);
-                    vect3.x = -2; vect3.y = 2;
+                    vect3.x = -3;
                     throwKnife(Quaternion.Euler(0, 0, 180), vect3);
                 }
             }
@@ -129,10 +130,11 @@ public class PlayerController : mobileEntity
             ascentTmr--;
             vect2.x = 0; vect2.y = 30;
             rb.velocity = vect2;
-            if (ascentTmr == 5) throwKnife(Quaternion.Euler(0,0,0));
+
+            //if (ascentTmr == 5) throwKnife(Quaternion.Euler(0,0,0));
             if (ascentTmr == 0)
             {
-                throwKnife(Quaternion.Euler(0, 0, 0));
+                //throwKnife(Quaternion.Euler(0, 0, 0));
                 enableGravity();
             }
         }
@@ -196,6 +198,7 @@ public class PlayerController : mobileEntity
     {
         if (facingDir == facingLeft) throwKnife(Quaternion.Euler(0, 0, 90));
         else throwKnife(Quaternion.Euler(0, 0, -90));
+        
         dashTmr = 8;
         disableGravity();
     }
@@ -211,12 +214,23 @@ public class PlayerController : mobileEntity
     {
         disableGravity();
         ascentTmr = 16;
+        StartCoroutine(fanAttack());
+    }
+
+    IEnumerator fanAttack()
+    {
+        yield return new WaitForSeconds(.5f);
+        for (int i = 0; i < 3; i++)
+        {
+            throwKnife(Quaternion.Euler(0,0,-10 + i * 10));
+            yield return new WaitForSeconds(.04f);
+        }
     }
 
     void skyfall()
     {
         disableGravity();
-        skyfallTmr = 40;
+        skyfallTmr = 30;
         camTargetTrfm.localPosition = Vector3.zero;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
-    [SerializeField] Transform plyrTrfm, camTarget;
+    public Transform plyrTrfm, camTarget;
     [SerializeField] float focusRadius = 2;
     public static Camera mainCam;
     Transform trfm;

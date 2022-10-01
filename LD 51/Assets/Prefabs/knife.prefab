@@ -52,10 +52,14 @@ MonoBehaviour:
   rb: {fileID: 2911480868508117306}
   trfm: {fileID: 5081508637233194180}
   rendTrfm: {fileID: 5765776631658335962}
+  ptclTrfm: {fileID: 6815473589750443865}
   sprRend: {fileID: 5622943215450024125}
   sprites:
   - {fileID: 21300000, guid: 85a65f94ab469114a910a2a68fe433ea, type: 3}
   - {fileID: 21300000, guid: 82b05a2ed72950547957ec20b94b1f4e, type: 3}
+  ptclSys: {fileID: 6815473589750443864}
+  ptclScr: {fileID: 4725783291911203947}
+  boxcol: {fileID: 8731783887450653713}
 --- !u!50 &2911480868508117306
 Rigidbody2D:
   serializedVersion: 4
@@ -90,7 +94,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -101,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 10}
+  m_Size: {x: 2, y: 8}
   m_EdgeRadius: 0
 --- !u!1 &4643569302454333225
 GameObject:
@@ -198,6 +202,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glint
       objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 45489
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2989612453635201987, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -208,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2989612453635201987, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.25
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 2989612453635201987, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
       propertyPath: m_LocalPosition.z
@@ -244,8 +308,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+--- !u!198 &6815473589750443864 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+  m_PrefabInstance: {fileID: 8640245707609158810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6815473589750443865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989612453635201987, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
   m_PrefabInstance: {fileID: 8640245707609158810}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6815473589750443866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2989612453635201984, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+  m_PrefabInstance: {fileID: 8640245707609158810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4725783291911203947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815473589750443866}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21c861a0ee9db441ab4645b80d7826c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0.5

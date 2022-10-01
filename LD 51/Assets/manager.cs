@@ -19,7 +19,7 @@ public class manager : MonoBehaviour
         tenSecTimer--;
         if (tenSecTimer % 50 == 0)
         {
-            alpha.a = .1f - tenSecTimer / 5000f;
+            alpha.a = .4f - tenSecTimer / 1250f;
             rend.color = alpha;
             rend.sprite = numbers[tenSecTimer/50];
         }

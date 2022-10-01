@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 871971136600087654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6683709989062213867}
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 4621891115479004674}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6683709989062213867}
@@ -281,7 +281,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -481,7 +481,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 9.8
   m_Material: {fileID: 0}
@@ -504,9 +504,10 @@ MonoBehaviour:
   ID: 1
   maxHP: 0
   hp: 0
+  deathFX: {fileID: 4684054105456521551, guid: d7af7bba55278ea49a388b251f180e11, type: 3}
   scale: {x: 0, y: 0, z: 0}
   speed: 14
-  jumpHeight: 8
+  jumpHeight: 12
   remainingJumps: 1
   knifeObj: {fileID: 2911480868508117305, guid: c7a2d5a6bc91c9c4892d5e1fe12ff1f3, type: 3}
   nearestEnemy: {fileID: 0}
@@ -547,7 +548,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.9}
   m_EdgeRadius: 0
 --- !u!1 &6209199225326475878
 GameObject:
@@ -668,8 +669,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6521948665559545706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 10}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: -9, z: 10}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6683709989062213867}

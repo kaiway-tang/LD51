@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipController : MonoBehaviour
+public class SpaceshipController : mobileEntity
 {
 
-    [SerializeField] Transform[] dropOffPoints;
+    [SerializeField] Vector2[] dropOffPoints;
     [SerializeField] float radius = 20;
     [SerializeField] float speed = 5;
     [SerializeField] GameObject dropOffProgress;
@@ -26,9 +26,7 @@ public class SpaceshipController : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        int randomIndex = Random.Range(0, dropOffPoints.Length);
-        Debug.Log(randomIndex);
-        dropOffPoint = dropOffPoints[randomIndex].position;
+        dropOffPoint = dropOffPoints[Random.Range(0, dropOffPoints.Length)];
         float angle = Random.value * Mathf.PI * 2f;
         startPoint = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
         transform.position = startPoint;
@@ -39,20 +37,21 @@ public class SpaceshipController : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(dropOffPoint, transform.position);
-        if(distance < 2)
+        if (departing)
         {
-            body.velocity = direction.normalized * Mathf.Lerp(0, speed, distance / direction.magnitude);
+            body.velocity = direction.normalized * speed;
+            return;
+        }
+        if (distance < 1)
+        {
+            body.velocity = direction.normalized * speed * 0.05f;
 
         }
         else
         {
             body.velocity = direction.normalized * speed;
         }
-        if (departing)
-        {
-            body.velocity = direction.normalized * speed;
-            return;
-        }
+
         if(droppingOff)
         {
             if(currentDropOffProgress < dropOffTime)
