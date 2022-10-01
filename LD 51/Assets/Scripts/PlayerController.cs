@@ -8,16 +8,27 @@ public class PlayerController : mobileEntity
     [SerializeField] float jumpHeight = 2;
     public int remainingJumps = 1;
     [SerializeField] GameObject knifeObj;
-    [SerializeField] Transform nearestEnemy;
-    public static int knivesLeft = 10;
+    [SerializeField] Transform nearestEnemy, camTargetTrfm;
+
+    public static int knivesLeft = 9;
+    [SerializeField] SpriteRenderer knivesRend;
+    [SerializeField] Sprite[] knivesSprites;
 
     public static Transform plyrTrfm;
     public bool onGround = true;
     int gravityLock;
 
-    int dashTmr;
+    int dashTmr, skyfallTmr, annihilateTmr, ascentTmr;
 
-    // Start is called before the first frame update
+    public static PlayerController self;
+    Vector2 vect2;
+    Vector3 vect3;
+
+    private void Awake()
+    {
+        self = GetComponent<PlayerController>();
+    }
+
     new void Start()
     {
         base.Start();
@@ -28,10 +39,12 @@ public class PlayerController : mobileEntity
     void Update()
     {
         //checkMovement();
-        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 0 && gravityLock < 1)
-        {
-            dash();
-        }
+        if (Input.GetKeyDown(KeyCode.U) && knivesLeft > 0 && gravityLock < 1) dash();
+        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 2 && gravityLock < 1) annihilate();
+        if (Input.GetKeyDown(KeyCode.O) && knivesLeft > 4 && gravityLock < 1) skyfall();
+        if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 1 && gravityLock < 1) ascent();
+
+
         if (Input.GetKeyDown(KeyCode.Space) && gravityLock < 1)
         {
             Jump();
@@ -50,6 +63,77 @@ public class PlayerController : mobileEntity
                 setXVelocity(0);
             }
         }
+        if (skyfallTmr > 0)
+        {
+            if (skyfallTmr > 25)
+            {
+                vect2.x = 0; vect2.y = 11f;
+                rb.velocity = vect2;
+            } else
+            {
+                if (skyfallTmr == 25)
+                {
+                    vect3.x = 0; vect3.y = 2;
+                    throwKnife(Quaternion.Euler(0, 0, 180), vect3);
+                }
+                if (skyfallTmr == 20)
+                {
+                    vect3.x = 1; vect3.y = 2;
+                    throwKnife(Quaternion.Euler(0, 0, 180), vect3);
+                    vect3.x = -1; vect3.y = 2;
+                    throwKnife(Quaternion.Euler(0, 0, 180), vect3);
+                    CamController.self.hardLockOn();
+                }
+                if (skyfallTmr == 15)
+                {
+                    vect3.x = 2; vect3.y = 2;
+                    throwKnife(Quaternion.Euler(0, 0, 180), vect3);
+                    vect3.x = -2; vect3.y = 2;
+                    throwKnife(Quaternion.Euler(0, 0, 180), vect3);
+                }
+            }
+            if (skyfallTmr < 15 && !onGround)
+            {
+                vect2.x = 0; vect2.y = -70;
+                rb.velocity = vect2;
+            }
+            else
+            {
+                if (skyfallTmr == 15)
+                {
+                    CamController.self.hardLockOff();
+                    enableGravity();
+                    vect3.x = 1.5f; vect3.y = 1;
+                    camTargetTrfm.localPosition = vect3;
+                }
+                skyfallTmr--;
+            }
+            if (skyfallTmr == 0)
+            {
+                
+            }
+        }
+        if (annihilateTmr > 0)
+        {
+            annihilateTmr--;
+            if (annihilateTmr == 0)
+            {
+                enableGravity();
+            }
+        }
+        if (ascentTmr > 0)
+        {
+            ascentTmr--;
+            vect2.x = 0; vect2.y = 30;
+            rb.velocity = vect2;
+            if (ascentTmr == 5) throwKnife(Quaternion.Euler(0,0,0));
+            if (ascentTmr == 0)
+            {
+                throwKnife(Quaternion.Euler(0, 0, 0));
+                enableGravity();
+            }
+        }
+
         if (gravityLock < 1)
         {
             if (Input.GetKey(KeyCode.A))
@@ -115,18 +199,40 @@ public class PlayerController : mobileEntity
 
     void ascent()
     {
-
+        disableGravity();
+        ascentTmr = 16;
     }
 
     void skyfall()
     {
         disableGravity();
-
+        skyfallTmr = 40;
+        camTargetTrfm.localPosition = Vector3.zero;
     }
 
-    void decimate()
+    void annihilate()
     {
+        if (nearestEnemy)
+        {
 
+        } else
+        {
+            if (facingDir == facingLeft)
+            {
+                throwKnife(Quaternion.Euler(0, 0, 90));
+                throwKnife(Quaternion.Euler(0, 0, 110));
+                throwKnife(Quaternion.Euler(0, 0, 70));
+            }
+            else
+            {
+                throwKnife(Quaternion.Euler(0, 0, -90));
+                throwKnife(Quaternion.Euler(0, 0, -110));
+                throwKnife(Quaternion.Euler(0, 0, -70));
+            }
+        }
+        annihilateTmr = 10;
+        setRelativeXVelocity(-60);
+        disableGravity();
     }
 
     bool throwKnife(Quaternion angle)
@@ -134,7 +240,29 @@ public class PlayerController : mobileEntity
         if (knivesLeft < 1) return false;
         Instantiate(knifeObj, trfm.position, angle);
         knivesLeft--;
+        updateKnifeHUD();
         return true;
+    }
+
+    bool throwKnife(Quaternion angle, Vector3 offset)
+    {
+        if (knivesLeft < 1) return false;
+        Instantiate(knifeObj, trfm.position + offset, angle);
+        knivesLeft--;
+        updateKnifeHUD();
+        return true;
+    }
+
+    public void pickUpKnife()
+    {
+        knivesLeft++;
+        updateKnifeHUD();
+    }
+
+    void updateKnifeHUD()
+    {
+        if (knivesLeft == 0) knivesRend.sprite = null;
+        else knivesRend.sprite = knivesSprites[knivesLeft - 1];
     }
 
     void disableGravity()

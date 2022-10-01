@@ -5,7 +5,7 @@ using UnityEngine;
 public class knife : MonoBehaviour
 {
     [SerializeField] float spd;
-    int status, flightTime;
+    int status, age;
     const int thrown = 0, embedded = 1, returning = 2;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform trfm, rendTrfm;
@@ -20,11 +20,11 @@ public class knife : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        age++;
         if (status == thrown)
         {
             trfm.position += trfm.up * spd;
-            flightTime++;
-            if (flightTime == 25)
+            if (age == 25)
             {
                 trfm.localEulerAngles = new Vector3(0,0,180);
             }
@@ -48,7 +48,7 @@ public class knife : MonoBehaviour
         {
             if (!col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID) && status != thrown)
             {
-                PlayerController.knivesLeft++;
+                PlayerController.self.pickUpKnife();
                 Destroy(gameObject);
             }
         } else if (col.gameObject.layer == 6) //hit terrain
@@ -64,9 +64,9 @@ public class knife : MonoBehaviour
     {
         if (col.gameObject.layer == 7) //hit entity
         {
-            if (col.GetComponent<HPEntity>().ID == HPEntity.playerID && status != thrown)
+            if (col.GetComponent<HPEntity>().ID == HPEntity.playerID && status != thrown && age > 25)
             {
-                PlayerController.knivesLeft++;
+                PlayerController.self.pickUpKnife();
                 Destroy(gameObject);
             }
         }

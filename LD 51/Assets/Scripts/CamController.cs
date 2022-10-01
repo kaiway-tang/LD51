@@ -8,6 +8,9 @@ public class CamController : MonoBehaviour
     [SerializeField] float focusRadius = 2;
     public static Camera mainCam;
     Transform trfm;
+    float glideRate;
+
+    public static CamController self;
 
     Vector2 focusPoint;
     Vector3 difference;
@@ -18,11 +21,12 @@ public class CamController : MonoBehaviour
         trfm = transform;
         trfm.parent = null;
         mainCam = GetComponent<Camera>();
+        self = GetComponent<CamController>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        glideRate = .1f;
     }
 
     // Update is called once per frame
@@ -34,8 +38,8 @@ public class CamController : MonoBehaviour
 
     void cameraGlide()
     {
-        difference.x = (camTarget.position.x - trfm.position.x)*.1f;
-        difference.y = (camTarget.position.y - trfm.position.y)*.1f;
+        difference.x = (camTarget.position.x - trfm.position.x)*glideRate;
+        difference.y = (camTarget.position.y - trfm.position.y)*glideRate;
 
         trfm.position += difference;
     }
@@ -58,5 +62,19 @@ public class CamController : MonoBehaviour
             focusPoint = targetPoint;
         }
         trfm.localPosition = new Vector3(focusPoint.x, trfm.position.y, trfm.position.z);
+    }
+
+    int hardLock;
+
+    public void hardLockOn()
+    {
+        if (hardLock == 0) glideRate = .8f;
+        hardLock++;
+    }
+
+    public void hardLockOff()
+    {
+        hardLock--;
+        if (hardLock == 0) glideRate = .1f;
     }
 }
