@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
 
     public static Transform trfm;
 
-    bool onGround;
-
+    bool onGround = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +23,9 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         checkMovement();
-    }
-    private void LateUpdate()
-    {
-        onGround = false;
-
     }
 
     void checkMovement()
@@ -47,34 +41,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        groundDetection(collision);
-    }
-    
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        groundDetection(collision);
-    }
-
-    void groundDetection(Collision2D collision)
-    {
-        for (int i = 0; i < collision.contactCount; i++)
-        {
-            Vector2 normal = collision.GetContact(i).normal;
-            onGround |= normal.y >= 0.80;
-            currentJumpNumber = 0;
-        }
-    }
     void Jump()
     {
-        Debug.Log("JUMP");
-        if(!onGround)
-        {
-            return;
-        }
-        if(currentJumpNumber > maxAirJumps)
+        if(currentJumpNumber > maxAirJumps || !onGround)
         {
             return;
         }
