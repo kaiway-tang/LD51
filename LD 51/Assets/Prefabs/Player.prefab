@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1841512847773154660}
   - component: {fileID: 8230118252320344455}
   - component: {fileID: 7104148848322231703}
+  - component: {fileID: 4469044624848838609}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -100,6 +101,18 @@ MonoBehaviour:
   plyrTrfm: {fileID: 5974094064805365873}
   camTarget: {fileID: 6660644305712893328}
   focusRadius: 2
+--- !u!114 &4469044624848838609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092473412002938221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0e43e282af45049825cc9d52bb8f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5106323097554848926
 GameObject:
   m_ObjectHideFlags: 0

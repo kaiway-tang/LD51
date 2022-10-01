@@ -24,8 +24,11 @@ public class knife : MonoBehaviour
             trfm.position += trfm.up * spd;
         } else if (status == returning)
         {
-            trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - PlayerController.plyrTrfm.position.y, trfm.position.x - PlayerController.plyrTrfm.position.x) * Mathf.Rad2Deg + 180, Vector3.forward);
+            trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - PlayerController.plyrTrfm.position.y, trfm.position.x - PlayerController.plyrTrfm.position.x) * Mathf.Rad2Deg + 90, Vector3.forward);
             trfm.position += trfm.up * spd;
+        } else if (status == embedded)
+        {
+            if (manager.tenSecTimer == 1) status = returning;
         }
     }
 
@@ -33,7 +36,11 @@ public class knife : MonoBehaviour
     {
         if (col.gameObject.layer == 7) //hit entity
         {
-            col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID);
+            if (!col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID) && status == returning)
+            {
+                PlayerController.knivesLeft++;
+                Destroy(gameObject);
+            }
         } else if (col.gameObject.layer == 6) //hit terrain
         {
             if (status == thrown)

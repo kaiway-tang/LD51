@@ -16,15 +16,14 @@ public class HPEntity : MonoBehaviour
         }
         return false;
     }
-    public bool takeDamage(int amount, int ignoreID = -1) //returns true if entity is killed
+    public bool takeDamage(int amount, int ignoreID = -1) //returns false if entity is ignoreID
     {
         if (ignoreID == ID) return false;
         hp -= amount;
         if (hp <= 0)
         {
             Destroy(gameObject);
-            return true;
         }
-        return false;
+        return true;
     }
 }

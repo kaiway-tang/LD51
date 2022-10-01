@@ -8,12 +8,13 @@ public class PlayerController : mobileEntity
     [SerializeField] float jumpHeight = 2;
     public int remainingJumps = 1;
     [SerializeField] GameObject knifeObj;
-    int knivesLeft = 10;
+    public static int knivesLeft = 10;
 
     public static Transform plyrTrfm;
     public bool onGround = true;
-    bool velocityReset;
     int gravityLock;
+
+    int dashTmr;
 
     // Start is called before the first frame update
     new void Start()
@@ -26,10 +27,9 @@ public class PlayerController : mobileEntity
     void Update()
     {
         //checkMovement();
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 0)
         {
-            if (facingDir == facingLeft) Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, 90));
-            else Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, -90));
+            dash();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -39,29 +39,32 @@ public class PlayerController : mobileEntity
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (dashTmr > 0)
         {
-            if (!Input.GetKey(KeyCode.D))
+            dashTmr--;
+            setRelativeXVelocity(50);
+            if (dashTmr < 1)
             {
-                setFacingDir(facingLeft);
-                setXVelocity(-speed);
-                velocityReset = false;
+                enableGravity();
+                setXVelocity(0);
             }
-        } else if (Input.GetKey(KeyCode.D))
+        } else
         {
-            if (!Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
-                setFacingDir(facingRight);
-                setXVelocity(speed);
-                velocityReset = false;
+                if (!Input.GetKey(KeyCode.D))
+                {
+                    setFacingDir(facingLeft);
+                    setXVelocity(-speed);
+                }
             }
-        }
-        else
-        {
-            if (!velocityReset)
+            else if (Input.GetKey(KeyCode.D))
             {
-                //setXVelocity(0);
-                velocityReset = true;
+                if (!Input.GetKey(KeyCode.A))
+                {
+                    setFacingDir(facingRight);
+                    setXVelocity(speed);
+                }
             }
         }
     }
@@ -88,7 +91,7 @@ public class PlayerController : mobileEntity
                 return;
             } else
             {
-                Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, 0));
+                throwKnife(Quaternion.Euler(0, 0, 0));
             }
         }
         float jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight * rb.gravityScale);
@@ -98,7 +101,22 @@ public class PlayerController : mobileEntity
             jumpVelocity = jumpVelocity - rb.velocity.y;
         }
         rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+    }
+
+    void dash()
+    {
+        if (facingDir == facingLeft) throwKnife(Quaternion.Euler(0, 0, 90));
+        else throwKnife(Quaternion.Euler(0, 0, -90));
+        dashTmr = 8;
+        disableGravity();
+    }
+
+    bool throwKnife(Quaternion angle)
+    {
+        if (knivesLeft < 1) return false;
+        Instantiate(knifeObj, trfm.position, angle);
         knivesLeft--;
+        return true;
     }
 
     void disableGravity()

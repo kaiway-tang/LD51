@@ -23,7 +23,7 @@ public class mobileEntity : HPEntity
     {
         if (facingDir == dir) return;
         facingDir = dir;
-        if (facingDir)
+        if (facingDir == facingLeft)
         {
             scale.x = -Mathf.Abs(scale.x);
             trfm.localScale = scale;
@@ -34,10 +34,16 @@ public class mobileEntity : HPEntity
         }
     }
 
-    protected void setXVelocity(float value)
+    protected void setXVelocity(float value) //set x velocity only (leaves y unchanged)
     {
         vect2.x = value;
         vect2.y = rb.velocity.y;
         rb.velocity = vect2;
+    }
+
+    protected void setRelativeXVelocity(float value) //set x velocity in the direction entity is facing
+    {
+        if (facingDir == facingLeft) value *= -1;
+        setXVelocity(value);
     }
 }
