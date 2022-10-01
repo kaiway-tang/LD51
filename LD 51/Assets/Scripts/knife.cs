@@ -5,11 +5,12 @@ using UnityEngine;
 public class knife : MonoBehaviour
 {
     [SerializeField] float spd;
-    int status;
+    int status, flightTime;
     const int thrown = 0, embedded = 1, returning = 2;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] Transform trfm;
+    [SerializeField] Transform trfm, rendTrfm;
     [SerializeField] SpriteRenderer sprRend;
+    [SerializeField] Sprite[] sprites;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +23,22 @@ public class knife : MonoBehaviour
         if (status == thrown)
         {
             trfm.position += trfm.up * spd;
+            flightTime++;
+            if (flightTime == 25)
+            {
+                trfm.localEulerAngles = new Vector3(0,0,180);
+            }
         } else if (status == returning)
         {
             trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - PlayerController.plyrTrfm.position.y, trfm.position.x - PlayerController.plyrTrfm.position.x) * Mathf.Rad2Deg + 90, Vector3.forward);
-            trfm.position += trfm.up * spd;
-        } else if (status == embedded)
+            trfm.position += trfm.up * spd*.5f;
+            rendTrfm.Rotate(Vector3.forward * 30);
+        }
+        if (manager.tenSecTimer == 1)
         {
-            if (manager.tenSecTimer == 1) status = returning;
+            rendTrfm.Rotate(Vector3.forward * Random.Range(0,360));
+            status = returning;
+            sprRend.sprite = sprites[1];
         }
     }
 
@@ -36,7 +46,7 @@ public class knife : MonoBehaviour
     {
         if (col.gameObject.layer == 7) //hit entity
         {
-            if (!col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID) && status == returning)
+            if (!col.GetComponent<HPEntity>().takeDamage(10, HPEntity.playerID) && status != thrown)
             {
                 PlayerController.knivesLeft++;
                 Destroy(gameObject);
@@ -45,7 +55,19 @@ public class knife : MonoBehaviour
         {
             if (status == thrown)
             {
+                sprRend.sprite = sprites[0];
                 status = embedded;
+            }
+        }
+    }
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.layer == 7) //hit entity
+        {
+            if (col.GetComponent<HPEntity>().ID == HPEntity.playerID && status != thrown)
+            {
+                PlayerController.knivesLeft++;
+                Destroy(gameObject);
             }
         }
     }

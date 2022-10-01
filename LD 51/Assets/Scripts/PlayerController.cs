@@ -8,6 +8,7 @@ public class PlayerController : mobileEntity
     [SerializeField] float jumpHeight = 2;
     public int remainingJumps = 1;
     [SerializeField] GameObject knifeObj;
+    [SerializeField] Transform nearestEnemy;
     public static int knivesLeft = 10;
 
     public static Transform plyrTrfm;
@@ -27,11 +28,11 @@ public class PlayerController : mobileEntity
     void Update()
     {
         //checkMovement();
-        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 0)
+        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 0 && gravityLock < 1)
         {
             dash();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && gravityLock < 1)
         {
             Jump();
         }
@@ -48,7 +49,8 @@ public class PlayerController : mobileEntity
                 enableGravity();
                 setXVelocity(0);
             }
-        } else
+        }
+        if (gravityLock < 1)
         {
             if (Input.GetKey(KeyCode.A))
             {
@@ -91,7 +93,7 @@ public class PlayerController : mobileEntity
                 return;
             } else
             {
-                throwKnife(Quaternion.Euler(0, 0, 0));
+                throwKnife(Quaternion.Euler(0, 0, 180));
             }
         }
         float jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight * rb.gravityScale);
@@ -109,6 +111,22 @@ public class PlayerController : mobileEntity
         else throwKnife(Quaternion.Euler(0, 0, -90));
         dashTmr = 8;
         disableGravity();
+    }
+
+    void ascent()
+    {
+
+    }
+
+    void skyfall()
+    {
+        disableGravity();
+
+    }
+
+    void decimate()
+    {
+
     }
 
     bool throwKnife(Quaternion angle)

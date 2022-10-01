@@ -5,6 +5,9 @@ using UnityEngine;
 public class manager : MonoBehaviour
 {
     public static int tenSecTimer;
+    [SerializeField] SpriteRenderer rend;
+    [SerializeField] Sprite[] numbers;
+    [SerializeField] Color alpha;
     void Start()
     {
         tenSecTimer = 500;
@@ -14,8 +17,17 @@ public class manager : MonoBehaviour
     void FixedUpdate()
     {
         tenSecTimer--;
+        if (tenSecTimer % 50 == 0)
+        {
+            alpha.a = .1f - tenSecTimer / 5000f;
+            rend.color = alpha;
+            rend.sprite = numbers[tenSecTimer/50];
+        }
         if (tenSecTimer < 1)
         {
+            alpha.a = .01f;
+            rend.color = alpha;
+            rend.sprite = numbers[10];
             tenSecTimer = 500;
         }
     }
