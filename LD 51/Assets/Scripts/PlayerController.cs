@@ -41,10 +41,10 @@ public class PlayerController : mobileEntity
         //checkMovement();
         if (Input.GetKeyDown(KeyCode.U) && knivesLeft > 0 && gravityLock < 1) dash();
         if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 2 && gravityLock < 1) annihilate();
-        if (Input.GetKeyDown(KeyCode.O) && knivesLeft > 4 && gravityLock < 1) skyfall();
+        if (Input.GetKeyDown(KeyCode.S) && knivesLeft > 4 && gravityLock < 1) skyfall();
         if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 1 && gravityLock < 1) ascent();
 
-        if (Input.GetMouseButtonDown(0) && knivesLeft > 0 && gravityLock < 1) aimedDash();
+        if (Input.GetMouseButtonDown(0) && knivesLeft > 0 && gravityLock < 1) throwKnife(faceMouse());
         if (Input.GetMouseButtonDown(1) && knivesLeft > 2 && gravityLock < 1) aimedAnnihilate();
 
         if (Input.GetKeyDown(KeyCode.Space) && gravityLock < 1)
