@@ -44,6 +44,8 @@ public class PlayerController : mobileEntity
         if (Input.GetKeyDown(KeyCode.O) && knivesLeft > 4 && gravityLock < 1) skyfall();
         if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 1 && gravityLock < 1) ascent();
 
+        if (Input.GetMouseButtonDown(0) && knivesLeft > 0 && gravityLock < 1) aimedDash();
+        if (Input.GetMouseButtonDown(1) && knivesLeft > 2 && gravityLock < 1) aimedAnnihilate();
 
         if (Input.GetKeyDown(KeyCode.Space) && gravityLock < 1)
         {
@@ -56,7 +58,8 @@ public class PlayerController : mobileEntity
         if (dashTmr > 0)
         {
             dashTmr--;
-            setRelativeXVelocity(50);
+            //setRelativeXVelocity(50);
+            setAimedVelocity(50);
             if (dashTmr < 1)
             {
                 enableGravity();
@@ -197,6 +200,13 @@ public class PlayerController : mobileEntity
         disableGravity();
     }
 
+    void aimedDash()
+    {
+        throwKnife(faceMouse());
+        dashTmr = 8;
+        disableGravity();
+    }
+
     void ascent()
     {
         disableGravity();
@@ -235,6 +245,17 @@ public class PlayerController : mobileEntity
         disableGravity();
     }
 
+    void aimedAnnihilate()
+    {
+        throwKnife(faceMouse());
+        throwKnife(faceMouse() * Quaternion.Euler(0, 0, 10));
+        throwKnife(faceMouse() * Quaternion.Euler(0, 0, -10));
+
+        annihilateTmr = 10;
+        setAimedVelocity(-60);
+        disableGravity();
+    }
+
     bool throwKnife(Quaternion angle)
     {
         if (knivesLeft < 1) return false;
@@ -252,7 +273,6 @@ public class PlayerController : mobileEntity
         updateKnifeHUD();
         return true;
     }
-
     public void pickUpKnife()
     {
         knivesLeft++;
@@ -274,5 +294,14 @@ public class PlayerController : mobileEntity
     {
         gravityLock--;
         if (gravityLock == 0) rb.gravityScale = 9.8f;
+    }
+    Quaternion faceMouse()
+    {
+        return Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - CamController.mainCam.ScreenToWorldPoint(Input.mousePosition).y, trfm.position.x - CamController.mainCam.ScreenToWorldPoint(Input.mousePosition).x) * Mathf.Rad2Deg + 90, Vector3.forward);
+    }
+
+    void setAimedVelocity(int amount)
+    {
+        rb.velocity = (CamController.mainCam.ScreenToWorldPoint(Input.mousePosition) - trfm.position).normalized * amount;
     }
 }
