@@ -2,37 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : mobileEntity
 {
     [SerializeField] float speed = 2;
     [SerializeField] float jumpHeight = 2;
-    [SerializeField] int maxAirJumps = 1;
-    int currentJumpNumber = 0; 
+    public int remainingJumps = 1;
     [SerializeField] GameObject knifeObj;
-    int knivesLeft;
-    Rigidbody2D body;
+    int knivesLeft = 10;
 
-    public static Transform trfm;
+    public static Transform plyrTrfm;
+    public bool onGround = true;
+    bool velocityReset;
+    int gravityLock;
 
-    bool onGround = true;
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        trfm = transform;
-        body = GetComponent<Rigidbody2D>();
+        base.Start();
+        plyrTrfm = trfm;
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkMovement();
+        //checkMovement();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (facingDir == facingLeft) Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, 90));
+            else Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, -90));
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (!Input.GetKey(KeyCode.D))
+            {
+                setFacingDir(facingLeft);
+                setXVelocity(-speed);
+                velocityReset = false;
+            }
+        } else if (Input.GetKey(KeyCode.D))
+        {
+            if (!Input.GetKey(KeyCode.A))
+            {
+                setFacingDir(facingRight);
+                setXVelocity(speed);
+                velocityReset = false;
+            }
+        }
+        else
+        {
+            if (!velocityReset)
+            {
+                //setXVelocity(0);
+                velocityReset = true;
+            }
+        }
     }
 
     void checkMovement()
     {
         float x = Input.GetAxis("Horizontal");
         float horizontalSpeed = x * speed;
-        body.velocity = new Vector2(horizontalSpeed, body.velocity.y);
+        rb.velocity = new Vector2(horizontalSpeed, rb.velocity.y);
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -43,22 +81,34 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(currentJumpNumber > maxAirJumps || !onGround)
+        if (!onGround)
         {
-            return;
+            if (knivesLeft < 1)
+            {
+                return;
+            } else
+            {
+                Instantiate(knifeObj, trfm.position, Quaternion.Euler(0, 0, 0));
+            }
         }
-        float jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight * body.gravityScale);
+        float jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight * rb.gravityScale);
         // limit max jumping speed
-        if (body.velocity.y > 0f)
+        if (rb.velocity.y > 0f)
         {
-            jumpVelocity = jumpVelocity - body.velocity.y;
+            jumpVelocity = jumpVelocity - rb.velocity.y;
         }
-        body.velocity = new Vector2(body.velocity.x, jumpVelocity);
-        currentJumpNumber++;
+        rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+        knivesLeft--;
     }
 
-    void throwKnife()
+    void disableGravity()
     {
-        Instantiate(knifeObj, trfm.position, trfm.rotation);
+        if (gravityLock == 0) rb.gravityScale = 0;
+        gravityLock++;
+    }
+    void enableGravity()
+    {
+        gravityLock--;
+        if (gravityLock == 0) rb.gravityScale = 9.8f;
     }
 }

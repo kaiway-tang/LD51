@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    public int maxHP, hp;
-    
+    public int ID, maxHP, hp;
+    public static int playerID = 1;
     public bool heal(int amount) //returns true if entity is full hp
     {
         hp += amount;
@@ -16,8 +16,9 @@ public class HPEntity : MonoBehaviour
         }
         return false;
     }
-    public bool takeDamage(int amount) //returns true if entity is killed
+    public bool takeDamage(int amount, int ignoreID = -1) //returns true if entity is killed
     {
+        if (ignoreID == ID) return false;
         hp -= amount;
         if (hp <= 0)
         {

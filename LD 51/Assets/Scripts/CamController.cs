@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class CamController : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    [SerializeField] Transform plyrTrfm, camTarget;
     [SerializeField] float focusRadius = 2;
+    public static Camera mainCam;
+    Transform trfm;
 
     Vector2 focusPoint;
+    Vector3 difference;
 
     void Awake()
     {
-        focusPoint = player.position;
+        focusPoint = plyrTrfm.position;
+        trfm = transform;
+        trfm.parent = null;
+        mainCam = GetComponent<Camera>();
     }
     // Start is called before the first frame update
     void Start()
@@ -20,9 +26,23 @@ public class CamController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector2 targetPoint = player.position;
+        cameraGlide();
+        //cameraLerp();
+    }
+
+    void cameraGlide()
+    {
+        difference.x = (camTarget.position.x - trfm.position.x)*.1f;
+        difference.y = (camTarget.position.y - trfm.position.y)*.1f;
+
+        trfm.position += difference;
+    }
+
+    void cameraLerp()
+    {
+        Vector2 targetPoint = plyrTrfm.position;
         if (focusRadius > 0f)
         {
             float distance = Mathf.Abs(targetPoint.x - focusPoint.x);
@@ -37,6 +57,6 @@ public class CamController : MonoBehaviour
         {
             focusPoint = targetPoint;
         }
-        transform.localPosition = new Vector3(focusPoint.x, transform.position.y, transform.position.z);
+        trfm.localPosition = new Vector3(focusPoint.x, trfm.position.y, trfm.position.z);
     }
 }
