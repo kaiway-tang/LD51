@@ -6,10 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 2;
     [SerializeField] float jumpHeight = 2;
+    [SerializeField] GameObject knifeObj;
+    int knivesLeft;
     Rigidbody2D body;
+    Transform trfm;
     // Start is called before the first frame update
     void Start()
     {
+        trfm = transform;
         body = GetComponent<Rigidbody2D>();
     }
 
@@ -36,5 +40,10 @@ public class PlayerController : MonoBehaviour
     {
         float jumpVelocity = Mathf.Sqrt(-2 * Physics.gravity.y * jumpHeight * body.gravityScale);
         body.velocity = new Vector2(body.velocity.x, jumpVelocity);
+    }
+
+    void throwKnife()
+    {
+        Instantiate(knifeObj, trfm.position, trfm.rotation);
     }
 }
