@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject knifeObj;
     int knivesLeft;
     Rigidbody2D body;
-    Transform trfm;
+    public static Transform trfm;
     // Start is called before the first frame update
     void Start()
     {
