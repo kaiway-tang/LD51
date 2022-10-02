@@ -21,7 +21,7 @@ public class laserShip : mobileEntity
         tmr++;
         if (tmr < 25 || tmr > 174)
         {
-            if (tmr == 125)
+            if (tmr == 175)
             {
                 laserActive = false;
                 laser.SetActive(false);
