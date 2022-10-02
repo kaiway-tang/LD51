@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class manager : MonoBehaviour
 {
     public static int tenSecTimer, score, difficulty;
-    [SerializeField] SpriteRenderer tmrRend, scoreTensRend, scoreOnesRend;
+    [SerializeField] SpriteRenderer tmrRend, scoreTensRend, scoreOnesRend, vignette;
     [SerializeField] Sprite[] numbers;
-    [SerializeField] Color alpha;
+    [SerializeField] Color alpha, vigColor;
     [SerializeField] int diff;
 
     public static manager self;
@@ -28,11 +28,29 @@ public class manager : MonoBehaviour
         tenSecTimer--;
         if (tenSecTimer % 50 == 0)
         {
-            alpha.a = .4f - tenSecTimer / 1250f;
+            alpha.a = .25f - tenSecTimer / 2000f;
             tmrRend.color = alpha;
             tmrRend.sprite = numbers[tenSecTimer/50];
             difficulty++;
             diff = difficulty;
+            if (tenSecTimer == 150)
+            {
+                vigColor.a = .2f;
+                vignette.color = vigColor;
+                StartCoroutine(fade());
+            }
+            if (tenSecTimer == 100)
+            {
+                vigColor.a = .4f;
+                vignette.color = vigColor;
+                StartCoroutine(fade());
+            }
+            if (tenSecTimer == 50)
+            {
+                vigColor.a = .6f;
+                vignette.color = vigColor;
+                StartCoroutine(fade());
+            }
         }
         if (tenSecTimer < 1)
         {
@@ -46,6 +64,16 @@ public class manager : MonoBehaviour
             score = 0; difficulty = 0;
             PlayerController.knivesLeft = 9;
             SceneManager.LoadScene("knife throw");
+        }
+    }
+
+    IEnumerator fade()
+    {
+        while (vignette.color.a>0)
+        {
+            vigColor.a -= .01f;
+            vignette.color = vigColor;
+            yield return new WaitForSeconds(.04f);
         }
     }
 

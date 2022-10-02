@@ -46,4 +46,13 @@ public class mobileEntity : HPEntity
         if (facingDir == facingLeft) value *= -1;
         setXVelocity(value);
     }
+
+    protected void faceVect2(float x, float y)
+    {
+        trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - y, trfm.position.x - x) * Mathf.Rad2Deg + 90, Vector3.forward);
+    }
+    protected void faceVect2(Vector2 target)
+    {
+        trfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(trfm.position.y - target.y, trfm.position.x - target.x) * Mathf.Rad2Deg + 90, Vector3.forward);
+    }
 }
