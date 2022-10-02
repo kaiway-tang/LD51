@@ -74,11 +74,11 @@ GameObject:
   - component: {fileID: 7555858980069367543}
   - component: {fileID: 7555858980069367542}
   - component: {fileID: 7555858980069367501}
-  - component: {fileID: 7555858980069367498}
   - component: {fileID: 7555858980069367502}
   - component: {fileID: 7555858980069367503}
   - component: {fileID: 7555858980069367500}
   - component: {fileID: 4099091381978296807}
+  - component: {fileID: 8296647526289564474}
   m_Layer: 7
   m_Name: pathfindingEnemy GOOD
   m_TagString: Untagged
@@ -175,34 +175,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &7555858980069367498
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555858980069367540}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9b707a32a04532b4693475c3951a956d, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
 --- !u!114 &7555858980069367502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +277,19 @@ MonoBehaviour:
   deathFX: {fileID: 4684054105456521551, guid: d7af7bba55278ea49a388b251f180e11, type: 3}
   scale: {x: 0, y: 0, z: 0}
   destinationScr: {fileID: 7555858980069367502}
+--- !u!58 &8296647526289564474
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555858980069367540}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: bf1c69133415a5541862064218e85843, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4

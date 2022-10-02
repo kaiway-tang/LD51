@@ -77,4 +77,20 @@ public class CamController : MonoBehaviour
         hardLock--;
         if (hardLock == 0) glideRate = .1f;
     }
+
+
+    public static int trauma;
+    void processTrauma()
+    {
+        if (trauma > 0)
+        {
+            trauma--;
+
+        }
+    }
+
+    void addTrauma(int amount)
+    {
+
+    }
 }
