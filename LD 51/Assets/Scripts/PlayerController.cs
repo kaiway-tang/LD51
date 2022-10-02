@@ -71,7 +71,7 @@ public class PlayerController : mobileEntity
         {
             if (skyfallTmr > 25)
             {
-                vect2.x = 0; vect2.y = 22f;
+                vect2.x = 0; vect2.y = 30f;
                 rb.velocity = vect2;
             } else
             {
@@ -128,7 +128,7 @@ public class PlayerController : mobileEntity
         if (ascentTmr > 0)
         {
             ascentTmr--;
-            vect2.x = 0; vect2.y = 30;
+            vect2.x = 0; vect2.y = 45;
             rb.velocity = vect2;
 
             //if (ascentTmr == 5) throwKnife(Quaternion.Euler(0,0,0));
@@ -213,13 +213,13 @@ public class PlayerController : mobileEntity
     void ascent()
     {
         disableGravity();
-        ascentTmr = 16;
+        ascentTmr = 14;
         StartCoroutine(fanAttack());
     }
 
     IEnumerator fanAttack()
     {
-        yield return new WaitForSeconds(.5f);
+        //yield return new WaitForSeconds(.5f);
         for (int i = 0; i < 3; i++)
         {
             throwKnife(Quaternion.Euler(0,0,-10 + i * 10));

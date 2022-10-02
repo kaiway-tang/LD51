@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class manager : MonoBehaviour
 {
-    public static int tenSecTimer;
+    public static int tenSecTimer, kills;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Sprite[] numbers;
     [SerializeField] Color alpha;
@@ -29,6 +30,11 @@ public class manager : MonoBehaviour
             rend.color = alpha;
             rend.sprite = numbers[10];
             tenSecTimer = 500;
+        }
+        if (Input.GetKey(KeyCode.Backspace))
+        {
+            PlayerController.knivesLeft = 9;
+            SceneManager.LoadScene("knife throw");
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class knife : MonoBehaviour
 {
     [SerializeField] float spd;
-    int status, age, damage;
+    int status, age;
     const int thrown = 0, embedded = 1, returning = 2;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform trfm, rendTrfm, ptclTrfm;
@@ -14,10 +14,12 @@ public class knife : MonoBehaviour
     [SerializeField] ParticleSystem ptclSys;
     [SerializeField] selfDest ptclScr;
     [SerializeField] BoxCollider2D boxcol;
+    [SerializeField] attack attackScr;
+    [SerializeField] GameObject arrowObj;
     // Start is called before the first frame update
     void Start()
     {
-        damage = 10;
+        
     }
 
     // Update is called once per frame
@@ -44,7 +46,7 @@ public class knife : MonoBehaviour
             status = returning;
             sprRend.sprite = sprites[1];
             ptclSys.emissionRate = 70;
-            damage = 10;
+            attackScr.damage = 10;
         }
     }
 
@@ -52,7 +54,7 @@ public class knife : MonoBehaviour
     {
         if (col.gameObject.layer == 7) //hit entity
         {
-            if (!col.GetComponent<HPEntity>().takeDamage(damage, HPEntity.playerID) && status != thrown)
+            if (col.GetComponent<HPEntity>().ID == HPEntity.playerID && status != thrown)
             {
                 pickUp();
             }
@@ -81,7 +83,8 @@ public class knife : MonoBehaviour
         ptclTrfm.parent = null;
         ptclSys.Stop();
         ptclScr.enabled = true;
-        Destroy(gameObject);
+        Destroy(arrowObj);
+        Destroy(trfm.gameObject);
     }
 
     void embed()
@@ -89,6 +92,6 @@ public class knife : MonoBehaviour
         sprRend.sprite = sprites[0];
         status = embedded;
         ptclSys.emissionRate = 6;
-        damage = 0;
+        attackScr.damage = 0;
     }
 }

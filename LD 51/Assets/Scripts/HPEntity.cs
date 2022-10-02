@@ -5,7 +5,7 @@ using UnityEngine;
 public class HPEntity : MonoBehaviour
 {
     public int ID, maxHP, hp;
-    public static int playerID = 1;
+    public static int playerID = 1, enemy = 0;
     [SerializeField] GameObject deathFX;
     public bool heal(int amount) //returns true if entity is full hp
     {
@@ -24,7 +24,14 @@ public class HPEntity : MonoBehaviour
         if (hp <= 0)
         {
             Instantiate(deathFX, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            if (ID == playerID)
+            {
+                gameObject.SetActive(false);
+            } else
+            {
+                manager.kills++;
+                Destroy(gameObject);
+            }
         }
         return true;
     }
