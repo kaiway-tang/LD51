@@ -87,11 +87,11 @@ public class manager : MonoBehaviour
     }
 
     static float result;
-    public static float difficultyScaler(float max, int min = 1, float distribution = 100)
+    public static float difficultyScaler(float start, int end = 1, float distribution = 100)
     {
-        result = (1 - manager.difficulty / distribution) * max;
+        result = (1 - manager.difficulty / distribution) * start;
         //Debug.Log("ratio: " + manager.difficulty / distribution);
-        if (result < min) return min;
+        if (result < end) return end;
         else return result;
     }
 }

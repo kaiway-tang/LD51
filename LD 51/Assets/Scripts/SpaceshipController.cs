@@ -61,9 +61,9 @@ public class SpaceshipController : mobileEntity
             }
             else
             {
-                for(int i = 0; i < enemyCount; i++)
+                for(int i = 0; i < Random.Range(1,(manager.difficulty/15)+1); i++)
                 {
-                    Instantiate(enemy, transform.position, Quaternion.identity);
+                    Instantiate(enemy, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f,1f),0), Quaternion.identity);
 
                 }
                 droppingOff = false;
