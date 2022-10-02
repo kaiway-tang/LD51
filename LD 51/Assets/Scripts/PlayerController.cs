@@ -34,7 +34,8 @@ public class PlayerController : mobileEntity
     {
         base.Start();
         plyrTrfm = trfm;
-    }
+        knivesLeft = 9;
+}
 
     // Update is called once per frame
     void Update()
