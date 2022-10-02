@@ -534,7 +534,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0e43e282af45049825cc9d52bb8f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rend: {fileID: 7836243388646243661}
+  tmrRend: {fileID: 7836243388646243661}
+  scoreTensRend: {fileID: 4858654445428318535}
+  scoreOnesRend: {fileID: 4915724147794570279}
   numbers:
   - {fileID: 21300000, guid: 7292b303d3631924e9338d6b64060e77, type: 3}
   - {fileID: 21300000, guid: 2d45bd1e9e78f1441acf8058e7bcc4a6, type: 3}
@@ -704,8 +706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
-  maxHP: 0
-  hp: 0
+  maxHP: 10
+  hp: 10
   deathFX: {fileID: 4684054105456521551, guid: d7af7bba55278ea49a388b251f180e11, type: 3}
   scale: {x: 0, y: 0, z: 0}
   speed: 14
@@ -872,7 +874,7 @@ Transform:
   m_GameObject: {fileID: 6521948665559545706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -9.91, z: 10}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6683709989062213867}

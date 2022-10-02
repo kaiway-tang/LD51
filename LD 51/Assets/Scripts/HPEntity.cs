@@ -29,7 +29,7 @@ public class HPEntity : MonoBehaviour
                 gameObject.SetActive(false);
             } else
             {
-                manager.kills++;
+                manager.self.incrementScore(1);
                 Destroy(gameObject);
             }
         }

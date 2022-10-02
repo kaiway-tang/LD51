@@ -18,7 +18,7 @@ public class spawner : MonoBehaviour
         while (true)
         {
             Instantiate(enemy, Vector3.zero, Quaternion.identity);
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(manager.difficultyScaler(4,1,160));
         }
     }
 }
