@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpaceshipController : mobileEntity
 {
 
-    [SerializeField] Vector2[] dropOffPoints;
+    Vector2[] dropOffPoints;
     [SerializeField] float radius = 20;
     [SerializeField] float speed = 5;
     [SerializeField] GameObject dropOffProgress;
@@ -22,6 +22,12 @@ public class SpaceshipController : mobileEntity
     bool departing = false;
     float dropOffRadius = 0.5f;
     float currentDropOffProgress = 0;
+
+    public void setPoints(Vector2[] points)
+    {
+        dropOffPoints = points;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
