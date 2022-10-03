@@ -12,6 +12,8 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] TMP_InputField input0;
     [SerializeField] TMP_Text playerDisp;
     [SerializeField] TMP_Text scoreDisp;
+    [SerializeField] TMP_Text highPlayer;
+    [SerializeField] TMP_Text highScore;
     CanvasController canvas;
     
 
@@ -55,8 +57,13 @@ public class Leaderboard : MonoBehaviour
             yield return req.SendWebRequest();
             string players = "";
             string scores = "";
-            Debug.Log(req.downloadHandler.text);
-            foreach(string line in req.downloadHandler.text.Split('\n').Take(10))
+
+            string topPlayers = "";
+            string topScores = "";
+
+            string[] response = req.downloadHandler.text.Split('\n');
+
+            foreach (string line in response.Take(10))
             {
                 string[] entry = line.Split(',');
                 // elem 0 is time, 1 is name, 2 is score
@@ -69,6 +76,23 @@ public class Leaderboard : MonoBehaviour
             }
             playerDisp.text = players;
             scoreDisp.text = scores;
+
+            int len = response.Length;
+
+            for (int i = 0; i < Mathf.Min(10, len); i++)
+            {
+                string[] entry = response[len - 1 - i].Split(',');
+                // elem 0 is time, 1 is name, 2 is score
+                string name = entry[1];
+                string score = entry[2];
+                if (score == "Score")
+                    continue;
+                topPlayers += name + '\n';
+                topScores += score + '\n';
+            }
+
+            highPlayer.text = topPlayers;
+            highScore.text = topScores;
             
         }
     }
