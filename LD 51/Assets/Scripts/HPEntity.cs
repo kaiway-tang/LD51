@@ -7,6 +7,13 @@ public class HPEntity : MonoBehaviour
     public int ID, maxHP, hp;
     public static int playerID = 1, enemy = 0;
     [SerializeField] GameObject deathFX;
+    AudioPlayer sound;
+
+    protected void Start()
+    {
+        sound = GameObject.Find("SFXSource").GetComponent<AudioPlayer>();
+    }
+
     public bool heal(int amount) //returns true if entity is full hp
     {
         hp += amount;
@@ -23,6 +30,7 @@ public class HPEntity : MonoBehaviour
         hp -= amount;
         if (hp <= 0)
         {
+            sound.PlayDeath();
             for (int i = 0; i < 3; i++)
             {
                Transform dfxTrfm = Instantiate(deathFX, transform.position, Quaternion.identity).transform;

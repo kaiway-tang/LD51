@@ -16,10 +16,11 @@ public class knife : MonoBehaviour
     [SerializeField] BoxCollider2D boxcol;
     [SerializeField] attack attackScr;
     [SerializeField] GameObject arrowObj;
+    AudioPlayer audio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GameObject.Find("SFXSource").GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -90,6 +91,7 @@ public class knife : MonoBehaviour
 
     void embed()
     {
+        audio.PlayEmbed();
         sprRend.sprite = sprites[0];
         status = embedded;
         ptclSys.emissionRate = 6;

@@ -9,14 +9,17 @@ public class mobileEntity : HPEntity
     protected Transform trfm;
     protected Rigidbody2D rb;
     [SerializeField] Vector3 scale;
+    AudioPlayer audio;
 
     Vector2 vect2;
 
-    protected void Start()
+    new protected void Start()
     {
+        base.Start();
         trfm = transform;
         rb = GetComponent<Rigidbody2D>();
         scale = trfm.localScale;
+        
     }
 
     public void setFacingDir(bool dir)

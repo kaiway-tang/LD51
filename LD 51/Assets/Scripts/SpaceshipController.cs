@@ -31,6 +31,7 @@ public class SpaceshipController : mobileEntity
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         body = GetComponent<Rigidbody2D>();
         dropOffPoint = dropOffPoints[Random.Range(0, dropOffPoints.Length)];
         float angle = Random.value * Mathf.PI * 2f;
