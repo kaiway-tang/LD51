@@ -6,7 +6,7 @@ public class knife : MonoBehaviour
 {
     [SerializeField] float spd;
     int status, age;
-    const int thrown = 0, embedded = 1, returning = 2;
+    const int thrown = 0, embedded = 1, returning = 2, embeddedInShield = 3;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform trfm, rendTrfm, ptclTrfm;
     [SerializeField] SpriteRenderer sprRend;
@@ -65,6 +65,12 @@ public class knife : MonoBehaviour
             {
                 embed();
             }
+        } else if (col.gameObject.layer == 11) // hit shield
+        {
+            if(status == thrown)
+            {
+                embedShield(col.gameObject);
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D col)
@@ -97,5 +103,24 @@ public class knife : MonoBehaviour
         ptclSys.emissionRate = 6;
         attackScr.damage = 0;
         CamController.setTrauma(15);
+    }
+
+    void embedShield(GameObject obj)
+    {
+        audio.PlayEmbed();
+        sprRend.sprite = sprites[0];
+        status = embeddedInShield;
+        ptclSys.emissionRate = 6;
+        attackScr.damage = 0;
+        CamController.setTrauma(15);
+        trfm.SetParent(obj.transform);
+    }
+
+    private void OnDestroy()
+    {
+        if(status == embeddedInShield) // attached to shield
+        {
+            Instantiate(gameObject);
+        }
     }
 }
