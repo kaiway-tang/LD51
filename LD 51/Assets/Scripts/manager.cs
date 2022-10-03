@@ -13,6 +13,7 @@ public class manager : MonoBehaviour
     [SerializeField] GameObject binaryClockObj;
     [SerializeField] Transform binaryClockScaler;
     int powerupActive = 0;
+    AudioPlayer sound;
 
     public static manager self;
     Vector3 scale;
@@ -20,6 +21,7 @@ public class manager : MonoBehaviour
     private void Awake()
     {
         self = GetComponent<manager>();
+        sound = tmrRend.gameObject.GetComponent<AudioPlayer>();
     }
     void Start()
     {
@@ -56,18 +58,21 @@ public class manager : MonoBehaviour
             diff = difficulty;
             if (tenSecTimer == 150)
             {
+                sound.PlayKnife();  // Actually plays a beep, not the usual knife sound
                 vigColor.a = .2f;
                 vignette.color = vigColor;
                 StartCoroutine(fade());
             }
             if (tenSecTimer == 100)
             {
+                sound.PlayKnife();  // See above
                 vigColor.a = .4f;
                 vignette.color = vigColor;
                 StartCoroutine(fade());
             }
             if (tenSecTimer == 50)
             {
+                sound.PlayKnife();
                 vigColor.a = .6f;
                 vignette.color = vigColor;
                 StartCoroutine(fade());
