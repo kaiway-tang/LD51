@@ -7,10 +7,11 @@ using TMPro;
 
 public class Leaderboard : MonoBehaviour
 {
-    [SerializeField] InputField input1;
-    [SerializeField] InputField input0;
+    // [SerializeField] InputField input1;
+    [SerializeField] TMP_InputField input0;
     [SerializeField] TMP_Text playerDisp;
     [SerializeField] TMP_Text scoreDisp;
+    CanvasController canvas;
     
 
     [SerializeField] string baseUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdi3X-YFdFZAK4PQ7PKycQ7RJq9EMBpyG9k8lZ4t0bze9lyTA/formResponse";
@@ -18,7 +19,7 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        canvas = GetComponent<CanvasController>();
     }
 
     // Sends post request to given url
@@ -30,11 +31,12 @@ public class Leaderboard : MonoBehaviour
         byte[] data = form.data;
         WWW www = new WWW(baseUrl, data);
         yield return www;
+        canvas.Transition();
     }
 
     public void Submit()
     {
-        StartCoroutine(Post(input1.text, input0.text));
+        StartCoroutine(Post(manager.score.ToString(), input0.text));
     }
 
     public void Retrieve()
