@@ -8,7 +8,7 @@ public class PlayerController : mobileEntity
     [SerializeField] float jumpHeight = 2;
     public int remainingJumps = 1;
     [SerializeField] GameObject knifeObj;
-    [SerializeField] Transform nearestEnemy, camTargetTrfm;
+    [SerializeField] Transform nearestEnemy, camTargetTrfm, spriteTrfm;
 
     public static int knivesLeft = 9;
     [SerializeField] SpriteRenderer knivesRend;
@@ -60,6 +60,9 @@ public class PlayerController : mobileEntity
 
     private void FixedUpdate()
     {
+        if (CamController.mainCam.ScreenToWorldPoint(Input.mousePosition).x > trfm.position.x) setFacingDir(facingRight);
+        else setFacingDir(facingLeft);
+        spriteTrfm.rotation = faceMouse();
         if (dashTmr > 0)
         {
             dashTmr--;
@@ -149,7 +152,6 @@ public class PlayerController : mobileEntity
             {
                 if (!Input.GetKey(KeyCode.D))
                 {
-                    setFacingDir(facingLeft);
                     setXVelocity(-speed);
                 }
             }
@@ -157,7 +159,6 @@ public class PlayerController : mobileEntity
             {
                 if (!Input.GetKey(KeyCode.A))
                 {
-                    setFacingDir(facingRight);
                     setXVelocity(speed);
                 }
             }
