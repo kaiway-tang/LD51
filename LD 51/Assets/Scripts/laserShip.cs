@@ -9,6 +9,8 @@ public class laserShip : mobileEntity
     [SerializeField] SpriteRenderer strobe;
     [SerializeField] Color alpha;
     bool fadeIn, laserActive;
+    [SerializeField] bool isTurret;
+
     new void Start()
     {
         base.Start();
@@ -19,7 +21,7 @@ public class laserShip : mobileEntity
     void FixedUpdate()
     {
         tmr++;
-        if (tmr < 25 || tmr > 174)
+        if ((tmr < 25 || tmr > 174) && !isTurret)
         {
             if (tmr == 175)
             {

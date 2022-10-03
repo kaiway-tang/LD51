@@ -60,6 +60,7 @@ MonoBehaviour:
   telegraph: {fileID: 2115793677308521611}
   strobe: {fileID: 7663361317007496409}
   alpha: {r: 1, g: 1, b: 1, a: 0}
+  isTurret: 0
 --- !u!61 &485860953999978655
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -84,7 +85,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!212 &8957354981853557860
 SpriteRenderer:
