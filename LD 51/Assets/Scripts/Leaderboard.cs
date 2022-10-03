@@ -37,7 +37,7 @@ public class Leaderboard : MonoBehaviour
 
     public void Submit()
     {
-        StartCoroutine(Post(manager.score.ToString(), input0.text));
+        StartCoroutine(Post(manager.score.ToString(), input0.text.ToLower()));
     }
 
     public void Retrieve()
