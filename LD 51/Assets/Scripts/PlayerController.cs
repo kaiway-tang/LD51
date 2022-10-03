@@ -266,13 +266,28 @@ public class PlayerController : mobileEntity
 
     void aimedAnnihilate()
     {
-        throwKnife(faceMouse());
-        throwKnife(faceMouse() * Quaternion.Euler(0, 0, 10));
-        throwKnife(faceMouse() * Quaternion.Euler(0, 0, -10));
+        //throwKnife(faceMouse());
+        //throwKnife(faceMouse() * Quaternion.Euler(0, 0, 10));
+        //throwKnife(faceMouse() * Quaternion.Euler(0, 0, -10));
 
+        //annihilateTmr = 10;
+        //setAimedVelocity(-60);
+        //disableGravity();
+        StartCoroutine(knifeFan());
+    }
+
+    IEnumerator knifeFan()
+    {
         annihilateTmr = 10;
         setAimedVelocity(-60);
         disableGravity();
+
+        for (int i = 0; i < 3; i++)
+        {
+            throwKnife(faceMouse() * Quaternion.Euler(0, 0, -10 + 10 * i));
+            yield return new WaitForSeconds(0.05f);
+        }
+
     }
 
     bool throwKnife(Quaternion angle)
