@@ -26,6 +26,8 @@ public class manager : MonoBehaviour
     void Start()
     {
         tenSecTimer = 500;
+        alpha.a = .05f;
+        tmrRend.color = alpha;
     }
 
     public void applyPowerup()
@@ -51,7 +53,7 @@ public class manager : MonoBehaviour
         tenSecTimer--;
         if (tenSecTimer % 50 == 0)
         {
-            alpha.a = .25f - tenSecTimer / 2000f;
+            alpha.a = .25f - tenSecTimer / 2500f;
             tmrRend.color = alpha;
             tmrRend.sprite = numbers[tenSecTimer/50];
             difficulty++;
@@ -81,7 +83,7 @@ public class manager : MonoBehaviour
         if (tenSecTimer < 1)
         {
             CamController.setTrauma(15);
-            alpha.a = .01f;
+            alpha.a = .05f;
             tmrRend.color = alpha;
             tmrRend.sprite = numbers[10];
             tenSecTimer = 500;
