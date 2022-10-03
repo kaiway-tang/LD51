@@ -81,7 +81,7 @@ public class manager : MonoBehaviour
             tmrRend.sprite = numbers[10];
             tenSecTimer = 500;
         }
-        if (Input.GetKey(KeyCode.Backspace)) resetGame();
+        if (Input.GetKey(KeyCode.Tab)) resetGame();
     }
 
     IEnumerator fade()
