@@ -10,6 +10,7 @@ public class manager : MonoBehaviour
     [SerializeField] Sprite[] numbers;
     [SerializeField] Color alpha, vigColor;
     [SerializeField] int diff;
+    int powerupActive = 0;
 
     public static manager self;
 
@@ -22,9 +23,17 @@ public class manager : MonoBehaviour
         tenSecTimer = 500;
     }
 
+    public void applyPowerup()
+    {
+        powerupActive = 500;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (powerupActive > 0) {
+            powerupActive--;
+            if (tenSecTimer > 100) { tenSecTimer = 100; }         
+        }
         tenSecTimer--;
         if (tenSecTimer % 50 == 0)
         {
