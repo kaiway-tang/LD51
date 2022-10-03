@@ -79,7 +79,8 @@ public class Leaderboard : MonoBehaviour
 
             int len = response.Length;
 
-            for (int i = 0; i < Mathf.Min(9, len); i++)
+            // One extra because ends in the categories
+            for (int i = 0; i < Mathf.Min(10, len); i++)
             {
                 string[] entry = response[len - 1 - i].Split(',');
                 // elem 0 is time, 1 is name, 2 is score

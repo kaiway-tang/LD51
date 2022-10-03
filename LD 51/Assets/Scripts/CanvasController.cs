@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class CanvasController : MonoBehaviour
         leaderboard.SetActive(false);
         restartPrompt.SetActive(true);
         board.Retrieve();
+    }
+
+    public void ToMenu()
+    {
+        SceneManager.LoadScene("menu");
     }
 
     // Update is called once per frame
