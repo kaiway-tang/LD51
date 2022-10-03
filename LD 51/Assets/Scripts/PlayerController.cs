@@ -13,6 +13,7 @@ public class PlayerController : mobileEntity
     public static int knivesLeft = 9;
     [SerializeField] SpriteRenderer knivesRend;
     [SerializeField] Sprite[] knivesSprites;
+    [SerializeField] AudioManager audio;
 
     public static Transform plyrTrfm;
     public bool onGround = true;
@@ -28,6 +29,7 @@ public class PlayerController : mobileEntity
     {
         self = GetComponent<PlayerController>();
         plyrTrfm = transform;
+        audio = GameObject.Find("GameManager").GetComponent<AudioManager>();
     }
 
     new void Start()
@@ -285,6 +287,7 @@ public class PlayerController : mobileEntity
         if (knivesLeft < 1) return false;
         Instantiate(knifeObj, trfm.position + offset, angle);
         knivesLeft--;
+        audio.PlayKnife();
         updateKnifeHUD();
         return true;
     }
