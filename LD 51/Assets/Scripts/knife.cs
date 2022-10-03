@@ -83,6 +83,7 @@ public class knife : MonoBehaviour
         ptclTrfm.parent = null;
         ptclSys.Stop();
         ptclScr.enabled = true;
+        CamController.setTrauma(10);
         Destroy(arrowObj);
         Destroy(trfm.gameObject);
     }
@@ -93,5 +94,6 @@ public class knife : MonoBehaviour
         status = embedded;
         ptclSys.emissionRate = 6;
         attackScr.damage = 0;
+        CamController.setTrauma(15);
     }
 }
