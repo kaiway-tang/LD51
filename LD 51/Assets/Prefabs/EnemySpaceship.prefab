@@ -5009,6 +5009,7 @@ MonoBehaviour:
   dropOffProgress: {fileID: 2408075639628089152}
   enemy: {fileID: 7555858980069367540, guid: 0356d23213db213438eb071d2c62fcda, type: 3}
   shieldEnemy: {fileID: 574565522550432640, guid: 3dde9541b2bd2401fbcf46f8d5869b59, type: 3}
+  juggernautEnemy: {fileID: 7555858980069367540, guid: 6f9fa1353e63c46c0807d0005bd2e651, type: 3}
   shieldEnemyPercentage: 3
   enemyCount: 2
   dropOffTime: 1
