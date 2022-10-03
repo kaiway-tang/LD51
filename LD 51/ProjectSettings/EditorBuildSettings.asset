@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/knife throw.unity
-    guid: ae8027ee9408c9c429aeb7d4884a1829
-  - enabled: 1
     path: Assets/Scenes/menu.unity
     guid: e0de92a5d92860c4f96ef52f7f1befa7
+  - enabled: 1
+    path: Assets/Scenes/knife throw.unity
+    guid: ae8027ee9408c9c429aeb7d4884a1829
   m_configObjects: {}

@@ -39,7 +39,7 @@ public class HPEntity : MonoBehaviour
                 gameObject.SetActive(false);
             } else
             {
-                manager.self.incrementScore(11);
+                manager.self.incrementScore(1);
                 CamController.setTrauma(20);
                 Destroy(gameObject);
             }

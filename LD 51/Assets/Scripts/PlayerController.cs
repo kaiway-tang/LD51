@@ -16,7 +16,7 @@ public class PlayerController : mobileEntity
     [SerializeField] AudioPlayer audio;
 
     public static Transform plyrTrfm;
-    public bool onGround = true;
+    public bool onGround = false;
     int gravityLock;
 
     int dashTmr, skyfallTmr, annihilateTmr, ascentTmr;
