@@ -17,7 +17,7 @@ public class HPEntity : MonoBehaviour
         }
         return false;
     }
-    public bool takeDamage(int amount, int ignoreID = -1) //returns false if entity is ignoreID
+    public bool takeDamage(int amount, int ignoreID = -1, Transform source = null) //returns false if entity is ignoreID
     {
         if (ignoreID == ID) return false;
         hp -= amount;
@@ -25,7 +25,8 @@ public class HPEntity : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-               Instantiate(deathFX, transform.position, Quaternion.identity);
+               Transform dfxTrfm = Instantiate(deathFX, transform.position, Quaternion.identity).transform;
+               dfxTrfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(source.position.y - dfxTrfm.position.y, source.position.x - dfxTrfm.position.x) * Mathf.Rad2Deg + 90, Vector3.forward);
             }
             if (ID == playerID)
             {

@@ -10,7 +10,7 @@ public class smolder : MonoBehaviour
     int tmr;
     private void Start()
     {
-        trfm.Rotate(Vector3.forward * Random.Range(0,360));
+        trfm.Rotate(Vector3.forward * Random.Range(-20,21));
         rb.velocity = trfm.up * 24;
     }
     private void FixedUpdate()

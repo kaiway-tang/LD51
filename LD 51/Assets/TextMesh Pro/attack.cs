@@ -5,6 +5,7 @@ using UnityEngine;
 public class attack : MonoBehaviour
 {
     public int damage, entityID;
+    [SerializeField] Transform trfm;
     void Start()
     {
         
@@ -13,7 +14,11 @@ public class attack : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == 7) col.GetComponent<HPEntity>().takeDamage(damage, entityID);
+        if (col.gameObject.layer == 7)
+        {
+            if (trfm) col.GetComponent<HPEntity>().takeDamage(damage, entityID, trfm);
+            else col.GetComponent<HPEntity>().takeDamage(damage, entityID);
+        }
     }
 
 }

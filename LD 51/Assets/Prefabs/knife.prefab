@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   entityID: 1
+  trfm: {fileID: 6815473589750443865}
 --- !u!61 &3017358922921589976
 BoxCollider2D:
   m_ObjectHideFlags: 0

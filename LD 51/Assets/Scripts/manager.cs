@@ -10,9 +10,12 @@ public class manager : MonoBehaviour
     [SerializeField] Sprite[] numbers;
     [SerializeField] Color alpha, vigColor;
     [SerializeField] int diff;
+    [SerializeField] GameObject binaryClockObj;
+    [SerializeField] Transform binaryClockScaler;
     int powerupActive = 0;
 
     public static manager self;
+    Vector3 scale;
 
     private void Awake()
     {
@@ -26,12 +29,21 @@ public class manager : MonoBehaviour
     public void applyPowerup()
     {
         powerupActive = 500;
+        binaryClockObj.SetActive(true);
+        scale = Vector3.one;
+        binaryClockScaler.localScale = scale;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         if (powerupActive > 0) {
             powerupActive--;
+            scale.x = powerupActive / 500f;
+            binaryClockScaler.localScale = scale;
+            if (powerupActive < 1)
+            {
+                binaryClockObj.SetActive(false);
+            }
             if (tenSecTimer > 100) { tenSecTimer = 100; }         
         }
         tenSecTimer--;
