@@ -74,13 +74,13 @@ public class SpaceshipController : mobileEntity
             {
                 for(int i = 0; i < Random.Range(1,(manager.difficulty/40)+1); i++)
                 {
-                    if(Random.Range(0, 100) < shieldEnemyPercentage)
+                    if(Random.Range(0, 100) < manager.difficulty/40+1)
                     {
                         Instantiate(shieldEnemy, dropOffPoint, Quaternion.identity);
                     }
                     else
                     {
-                        Instantiate(enemy, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
+                        Instantiate(enemy, transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0), Quaternion.identity);
                     }
 
                 }
