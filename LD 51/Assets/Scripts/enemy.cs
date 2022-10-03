@@ -11,6 +11,7 @@ public class enemy : mobileEntity
     // Start is called before the first frame update
     new void Start()
     {
+        base.Start();
         plyrTrfm = PlayerController.plyrTrfm;
         destinationScr.target = plyrTrfm;
     }
