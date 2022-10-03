@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 500
   m_Sprite: {fileID: 21300000, guid: 5a497bddd6cdb24429c1e073f6db2a4c, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.011764706}
+  m_Color: {r: 0, g: 0.61960787, b: 1, a: 0.011764706}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -333,7 +333,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 61b311a48d51e8641bce5347d95b86b4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0.6194389, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -925,8 +925,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 34b5496f345ee9e4db376966bcecef0a, type: 3}
   - {fileID: 21300000, guid: 8799b7e9336215e4a9a7d5f40e83530e, type: 3}
   - {fileID: 21300000, guid: 5a497bddd6cdb24429c1e073f6db2a4c, type: 3}
-  alpha: {r: 1, g: 0, b: 0, a: 0}
-  vigColor: {r: 1, g: 1, b: 1, a: 0}
+  alpha: {r: 0, g: 0.61960787, b: 1, a: 0}
+  vigColor: {r: 0, g: 0.61960787, b: 1, a: 0}
   diff: 0
   binaryClockObj: {fileID: 5570939434394177120}
   binaryClockScaler: {fileID: 1467014085209755788}
