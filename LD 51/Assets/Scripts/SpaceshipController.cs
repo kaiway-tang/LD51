@@ -11,6 +11,8 @@ public class SpaceshipController : mobileEntity
     [SerializeField] GameObject dropOffProgress;
     [SerializeField] GameObject enemy;
     [SerializeField] GameObject shieldEnemy;
+    [SerializeField] GameObject juggernautEnemy;
+
     [SerializeField] int shieldEnemyPercentage = 10;
 
 
@@ -80,7 +82,13 @@ public class SpaceshipController : mobileEntity
                     }
                     else
                     {
-                        Instantiate(enemy, transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0), Quaternion.identity);
+                        if(Random.Range(0, 100) < 80)
+                        {
+                            Instantiate(juggernautEnemy, transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0), Quaternion.identity);
+                        } else
+                        {
+                            Instantiate(enemy, transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0), Quaternion.identity);
+                        }
                     }
 
                 }
