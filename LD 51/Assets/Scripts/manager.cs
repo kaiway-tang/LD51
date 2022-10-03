@@ -54,17 +54,13 @@ public class manager : MonoBehaviour
         }
         if (tenSecTimer < 1)
         {
+            CamController.setTrauma(15);
             alpha.a = .01f;
             tmrRend.color = alpha;
             tmrRend.sprite = numbers[10];
             tenSecTimer = 500;
         }
-        if (Input.GetKey(KeyCode.Backspace))
-        {
-            score = 0; difficulty = 0;
-            PlayerController.knivesLeft = 9;
-            SceneManager.LoadScene("knife throw");
-        }
+        if (Input.GetKey(KeyCode.Backspace)) resetGame();
     }
 
     IEnumerator fade()
@@ -75,6 +71,13 @@ public class manager : MonoBehaviour
             vignette.color = vigColor;
             yield return new WaitForSeconds(.04f);
         }
+    }
+
+    public static void resetGame()
+    {
+        score = 0; difficulty = 0;
+        PlayerController.knivesLeft = 9;
+        SceneManager.LoadScene("knife throw");
     }
 
     public void incrementScore(int amount)

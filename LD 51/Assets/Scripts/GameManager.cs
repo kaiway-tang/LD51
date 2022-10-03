@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void restart()
     {
-        SceneManager.LoadScene(0);
         canvas.SetActive(false);
+        manager.resetGame();
     }
 }

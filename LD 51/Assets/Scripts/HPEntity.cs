@@ -23,13 +23,18 @@ public class HPEntity : MonoBehaviour
         hp -= amount;
         if (hp <= 0)
         {
-            Instantiate(deathFX, transform.position, Quaternion.identity);
+            for (int i = 0; i < 3; i++)
+            {
+               Instantiate(deathFX, transform.position, Quaternion.identity);
+            }
             if (ID == playerID)
             {
+                CamController.setTrauma(30);
                 gameObject.SetActive(false);
             } else
             {
                 manager.self.incrementScore(1);
+                CamController.setTrauma(20);
                 Destroy(gameObject);
             }
         }

@@ -9,6 +9,7 @@ public class CamController : MonoBehaviour
     public static Camera mainCam;
     Transform trfm;
     float glideRate;
+    Vector3 leftRotatedZero = new Vector3(0, 0, 360);
 
     public static CamController self;
 
@@ -33,6 +34,7 @@ public class CamController : MonoBehaviour
     void FixedUpdate()
     {
         cameraGlide();
+        processTrauma();
         //cameraLerp();
     }
 
@@ -79,18 +81,38 @@ public class CamController : MonoBehaviour
     }
 
 
+    [SerializeField] float strength;
     public static int trauma;
+    static float instance;
+    static Vector3 shift;
     void processTrauma()
     {
         if (trauma > 0)
         {
             trauma--;
+            instance = trauma * trauma * strength;
+            shift.x = Random.Range(-instance, instance);
+            shift.y = Random.Range(-instance, instance)/2;
+            trfm.position += shift;
+            trfm.Rotate(Vector3.forward* Random.Range(-instance,instance));
+        }
 
+        if (Mathf.Abs(trfm.localEulerAngles.z) < .04f)
+        {
+            trfm.localEulerAngles = Vector3.zero;
+        }
+        else if (trfm.localEulerAngles.z < 180)
+        {
+            trfm.localEulerAngles += (Vector3.zero - trfm.localEulerAngles) * .1f;
+        }
+        else
+        {
+            trfm.localEulerAngles += (leftRotatedZero - trfm.localEulerAngles) * .1f;
         }
     }
 
-    void addTrauma(int amount)
+    public static void setTrauma(int amount)
     {
-
+        if (trauma < amount) trauma = amount;
     }
 }

@@ -188,7 +188,7 @@ MonoBehaviour:
   ID: 0
   maxHP: 10
   hp: 10
-  deathFX: {fileID: 4684054105456521551, guid: d7af7bba55278ea49a388b251f180e11, type: 3}
+  deathFX: {fileID: 602521296901481578, guid: d7af7bba55278ea49a388b251f180e11, type: 3}
   scale: {x: 0, y: 0, z: 0}
   dropOffPoints:
   - {x: 14, y: -4}
