@@ -25,9 +25,9 @@ public class laserShip : mobileEntity
     void FixedUpdate()
     {
         tmr++;
-        if ((tmr < 25 || tmr > 174) && !isTurret)
+        if ((tmr < 30 || tmr > 209) && !isTurret)
         {
-            if (tmr == 175)
+            if (tmr == 210)
             {
                 laserActive = false;
                 laser.SetActive(false);
@@ -37,9 +37,9 @@ public class laserShip : mobileEntity
             trfm.position += trfm.up * 1f;
         } else if (!isTurret)
         {
-            if (tmr % 25 == 0)
+            if (tmr % 30 == 0)
             {
-                if (tmr % 50 == 0)
+                if (tmr % 60 == 0)
                 {
                     telegraph.SetActive(false);
                     laserActive = true;

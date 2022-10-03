@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 public class manager : MonoBehaviour
 {
     public static int tenSecTimer, score, difficulty;
-    [SerializeField] SpriteRenderer tmrRend, scoreTensRend, scoreOnesRend, vignette;
+    [SerializeField] SpriteRenderer tmrRend, scoreHundsRend, scoreTensRend, scoreOnesRend, vignette;
     [SerializeField] Sprite[] numbers;
     [SerializeField] Color alpha, vigColor;
     [SerializeField] int diff;
     [SerializeField] GameObject binaryClockObj;
-    [SerializeField] Transform binaryClockScaler;
+    [SerializeField] Transform binaryClockScaler, scoreTrfm;
     int powerupActive = 0;
     AudioPlayer sound;
+
+    bool passed1Hund;
 
     public static manager self;
     Vector3 scale;
@@ -113,7 +115,16 @@ public class manager : MonoBehaviour
         if (PlayerController.self.hp < 1) return;
         score += amount;
         difficulty += 3;
-        scoreTensRend.sprite = numbers[score / 10];
+        if (score>99)
+        {
+            if (!passed1Hund)
+            {
+                passed1Hund = true;
+                scoreTrfm.localPosition += new Vector3(0.7f, 0, 0);
+            }
+            scoreHundsRend.sprite = numbers[score / 100];
+        }
+        scoreTensRend.sprite = numbers[score % 100 / 10];
         scoreOnesRend.sprite = numbers[score % 10];
     }
 

@@ -7,7 +7,7 @@ public class deparent : MonoBehaviour
     [SerializeField] Transform[] trfms;
     [SerializeField] deparent self;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < trfms.Length; i++)
         {
