@@ -5079,6 +5079,76 @@ Transform:
   m_Father: {fileID: 1989205029}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1862582821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862582823}
+  - component: {fileID: 1862582822}
+  m_Layer: 0
+  m_Name: shieldSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1862582822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862582821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59870a94598436d4fafb21e86751aa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2408075640354590291, guid: 0b787ab84b6a5c142b55eb1ce1ab6a1c, type: 3}
+  spawnpoints:
+  - {fileID: 1832484811}
+  - {fileID: 498655654}
+  - {fileID: 430233720}
+  - {fileID: 1107916928}
+  - {fileID: 1532870526}
+  - {fileID: 114841251}
+  - {fileID: 1819616991}
+  - {fileID: 1288721160}
+  - {fileID: 1897236902}
+  - {fileID: 1636924105}
+  - {fileID: 1640507835}
+  - {fileID: 1469926573}
+  - {fileID: 2127416117}
+  - {fileID: 1529572942}
+  - {fileID: 876631162}
+  - {fileID: 779153713}
+  - {fileID: 1659430258}
+  - {fileID: 1338247189}
+  - {fileID: 1774084750}
+  - {fileID: 1588743377}
+  - {fileID: 1546532329}
+  - {fileID: 105124630}
+  - {fileID: 1787536902}
+  - {fileID: 1698493506}
+--- !u!4 &1862582823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862582821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.51437104, y: 0.7639098, z: -0.1040603}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1878655668
 PrefabInstance:
   m_ObjectHideFlags: 0
