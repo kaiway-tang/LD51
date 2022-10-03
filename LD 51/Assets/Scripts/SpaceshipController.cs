@@ -82,7 +82,7 @@ public class SpaceshipController : mobileEntity
                     }
                     else
                     {
-                        if(Random.Range(0, 100) < 80)
+                        if(Random.Range(0, 100) < 5)
                         {
                             Instantiate(juggernautEnemy, transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0), Quaternion.identity);
                         } else

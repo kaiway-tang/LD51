@@ -31,18 +31,15 @@ public class HPEntity : MonoBehaviour
         if (hp <= 0)
         {
             sound.PlayDeath();
-            for (int i = 0; i < 3; i++)
-            {
-               Transform dfxTrfm = Instantiate(deathFX, transform.position, Quaternion.identity).transform;
-               dfxTrfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(source.position.y - dfxTrfm.position.y, source.position.x - dfxTrfm.position.x) * Mathf.Rad2Deg + 90, Vector3.forward);
-            }
+            Transform dfxTrfm = Instantiate(deathFX, transform.position, Quaternion.identity).transform;
+            dfxTrfm.rotation = Quaternion.AngleAxis(Mathf.Atan2(source.position.y - dfxTrfm.position.y, source.position.x - dfxTrfm.position.x) * Mathf.Rad2Deg + 90, Vector3.forward);
             if (ID == playerID)
             {
                 CamController.setTrauma(30);
                 gameObject.SetActive(false);
             } else
             {
-                manager.self.incrementScore(1);
+                manager.self.incrementScore(11);
                 CamController.setTrauma(20);
                 Destroy(gameObject);
             }
