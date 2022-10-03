@@ -10,6 +10,10 @@ public class SpaceshipController : mobileEntity
     [SerializeField] float speed = 5;
     [SerializeField] GameObject dropOffProgress;
     [SerializeField] GameObject enemy;
+    [SerializeField] GameObject shieldEnemy;
+    [SerializeField] int shieldEnemyPercentage = 10;
+
+
     [SerializeField] int enemyCount = 1;
     Rigidbody2D body;
     Vector2 direction;
@@ -70,7 +74,14 @@ public class SpaceshipController : mobileEntity
             {
                 for(int i = 0; i < Random.Range(1,(manager.difficulty/40)+1); i++)
                 {
-                    Instantiate(enemy, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f,1f),0), Quaternion.identity);
+                    if(Random.Range(0, 100) < shieldEnemyPercentage)
+                    {
+                        Instantiate(shieldEnemy, dropOffPoint, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(enemy, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
+                    }
 
                 }
                 droppingOff = false;

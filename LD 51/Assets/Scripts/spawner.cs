@@ -19,7 +19,7 @@ public class spawner : MonoBehaviour
     IEnumerator spawn()
     {
         while (true)
-        {
+        { 
             Instantiate(enemy, Vector3.zero, Quaternion.identity).GetComponent<SpaceshipController>().setPoints(spawnpoints.Select(point => (Vector2)point.position).ToArray());
             yield return new WaitForSeconds(manager.difficultyScaler(4,1,160));
         }
