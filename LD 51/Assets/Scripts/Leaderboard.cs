@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -55,12 +56,14 @@ public class Leaderboard : MonoBehaviour
             string players = "";
             string scores = "";
             Debug.Log(req.downloadHandler.text);
-            foreach(string line in req.downloadHandler.text.Split('\n'))
+            foreach(string line in req.downloadHandler.text.Split('\n').Take(10))
             {
                 string[] entry = line.Split(',');
                 // elem 0 is time, 1 is name, 2 is score
                 string name = entry[1];
                 string score = entry[2];
+                if (score == "Score")
+                    continue;
                 players += name + '\n';
                 scores += score + '\n';
             }
