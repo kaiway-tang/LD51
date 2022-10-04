@@ -15,7 +15,7 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] TMP_Text highPlayer;
     [SerializeField] TMP_Text highScore;
     CanvasController canvas;
-    
+    bool inPostRequest = false;
 
     [SerializeField] string baseUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdi3X-YFdFZAK4PQ7PKycQ7RJq9EMBpyG9k8lZ4t0bze9lyTA/formResponse";
 
@@ -35,11 +35,16 @@ public class Leaderboard : MonoBehaviour
         WWW www = new WWW(baseUrl, data);
         yield return www;
         canvas.Transition();
+        inPostRequest = false;
     }
 
     public void Submit()
     {
-        StartCoroutine(Post(manager.score.ToString(), input0.text.ToLower()));
+        if (!inPostRequest)
+        {
+            inPostRequest = true;
+            StartCoroutine(Post(manager.score.ToString(), input0.text.ToLower()));
+        }
     }
 
     public void Retrieve()
