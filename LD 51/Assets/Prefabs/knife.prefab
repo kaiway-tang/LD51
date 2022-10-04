@@ -383,6 +383,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glint
       objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201985, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989612453635201985, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1599080663
+      objectReference: {fileID: 0}
     - target: {fileID: 2989612453635201986, guid: a9804827aba83524ab27d812f6b23a41, type: 3}
       propertyPath: moveWithTransform
       value: 1

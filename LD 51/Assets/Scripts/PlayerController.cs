@@ -7,7 +7,7 @@ public class PlayerController : mobileEntity
     [SerializeField] float speed = 2;
     [SerializeField] float jumpHeight = 2;
     public int remainingJumps = 1;
-    [SerializeField] GameObject knifeObj;
+    [SerializeField] GameObject knifeObj, noKnivesTxt;
     [SerializeField] Transform nearestEnemy, camTargetTrfm, spriteTrfm;
 
     public static int knivesLeft = 9;
@@ -44,13 +44,13 @@ public class PlayerController : mobileEntity
     void Update()
     {
         //checkMovement();
-        if (Input.GetKeyDown(KeyCode.U) && knivesLeft > 0 && gravityLock < 1) dash();
-        if (Input.GetKeyDown(KeyCode.I) && knivesLeft > 2 && gravityLock < 1) annihilate();
-        if (Input.GetKeyDown(KeyCode.S) && knivesLeft > 4 && gravityLock < 1) skyfall();
-        if (Input.GetKeyDown(KeyCode.W) && knivesLeft > 2 && gravityLock < 1) ascent();
+        if (Input.GetKeyDown(KeyCode.U) && checkKnives(1) && gravityLock < 1) dash();
+        if (Input.GetKeyDown(KeyCode.I) && checkKnives(3) && gravityLock < 1) annihilate();
+        if (Input.GetKeyDown(KeyCode.S) && checkKnives(5) && gravityLock < 1) skyfall();
+        if (Input.GetKeyDown(KeyCode.W) && checkKnives(3) && gravityLock < 1) ascent();
 
-        if (Input.GetMouseButtonDown(0) && knivesLeft > 0 && gravityLock < 1) throwKnife(faceMouse());
-        if (Input.GetMouseButtonDown(1) && knivesLeft > 2 && gravityLock < 1) aimedAnnihilate();
+        if (Input.GetMouseButtonDown(0) && checkKnives(1) && gravityLock < 1) throwKnife(faceMouse());
+        if (Input.GetMouseButtonDown(1) && checkKnives(3) && gravityLock < 1) aimedAnnihilate();
 
         if (Input.GetKeyDown(KeyCode.Space) && gravityLock < 1)
         {
@@ -182,12 +182,12 @@ public class PlayerController : mobileEntity
     {
         if (!onGround)
         {
-            if (knivesLeft < 1)
-            {
-                return;
-            } else
+            if (checkKnives(1))
             {
                 throwKnife(Quaternion.Euler(0, 0, 180));
+            } else
+            {
+                return;
             }
         }
         float jumpVelocity = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight * rb.gravityScale);
@@ -300,6 +300,12 @@ public class PlayerController : mobileEntity
         return true;
     }
 
+    bool checkKnives(int req)
+    {
+        if (knivesLeft >= req) return true;
+        Instantiate(noKnivesTxt, trfm.position, Quaternion.identity);
+        return false;
+    }
     bool throwKnife(Quaternion angle, Vector3 offset)
     {
         if (knivesLeft < 1) return false;

@@ -1154,8 +1154,8 @@ SpriteMask:
   m_BackSortingLayerID: 1764010725
   m_FrontSortingLayer: 2
   m_BackSortingLayer: 2
-  m_FrontSortingOrder: 101
-  m_BackSortingOrder: 0
+  m_FrontSortingOrder: 106
+  m_BackSortingOrder: 104
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
 --- !u!1 &5974094064805365877
@@ -1245,6 +1245,7 @@ MonoBehaviour:
   jumpHeight: 12
   remainingJumps: 1
   knifeObj: {fileID: 2911480868508117305, guid: c7a2d5a6bc91c9c4892d5e1fe12ff1f3, type: 3}
+  noKnivesTxt: {fileID: 6586450379903777525, guid: b9fe91bdc55cb994e84c03aa2f0236f2, type: 3}
   nearestEnemy: {fileID: 0}
   camTargetTrfm: {fileID: 6660644305712893328}
   spriteTrfm: {fileID: 4512908894011439382}
@@ -1792,7 +1793,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1764010725
   m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingOrder: 105
   m_Sprite: {fileID: 7482667652216324306, guid: 4460451c91821f047999a79c49aebbbd, type: 3}
   m_Color: {r: 0, g: 0.6843004, b: 1, a: 1}
   m_FlipX: 0
